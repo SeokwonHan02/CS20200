@@ -1,0 +1,1 @@
+This project implements a console-based Nim game where a human player competes against a computer opponent. The game uses multiple piles of stones, and players take turns removing stones according to fixed rules. The player who removes the last stone wins.
