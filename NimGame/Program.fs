@@ -13,8 +13,18 @@ let showPiles (piles: int list) =
         match sublist with
         | [] -> ()
         | h :: t ->
-            let stones = String.replicate h "●"
-            printfn "Pile %d: %s (%d)" idx stones h
+            let rec makeStones count current =
+                if count = 0 then
+                    ""
+                else
+                    let space =
+                        if current > 0 && current % 5 = 0 then
+                            "  "
+                        else
+                            ""
+                    space + "● " + makeStones (count - 1) (current + 1)
+            let stones = makeStones h 0
+            printfn "Pile %d: (%2d) %s " idx h stones
             loop (idx + 1) t
     printfn ""
     printfn "Current piles:"
@@ -42,6 +52,7 @@ let applyMove (piles: int list) pile count =
 let readMove (piles: int list) : GameAction option =
     printf "Your move, ex) 3 2 or give up: "
     let input = Console.ReadLine()
+    printfn ""
 
     if String.IsNullOrEmpty(input) then 
         None
@@ -129,7 +140,8 @@ let optimalAiMove (piles: int list) =
 [<EntryPoint>]
 let main _ =
     Console.Clear()
-    printfn "NIM Game"
+    printfn "[NIM Game]"
+    printfn ""
 
     let mutable choice = ""
     while choice <> "1" && choice <> "2" do
@@ -145,7 +157,7 @@ let main _ =
 
     while not finished do
         printfn ""
-        printfn "Turn %d" turn
+        printfn "[Turn %d]" turn
         showPiles piles
 
         if playerTurn then
@@ -156,6 +168,7 @@ let main _ =
             | Some (Move(pile, count)) ->
                 piles <- applyMove piles pile count
                 printfn "You removed %d from pile %d." count pile
+                printfn ""
                 if isGameOver piles then
                     printfn "You win!"
                     finished <- true
