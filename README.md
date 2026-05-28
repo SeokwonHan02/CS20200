@@ -19,7 +19,6 @@ dotnet --version
 
 ### Run
 From the project directory, run:
-You can check your .NET version with:
 
 ```bash
 cd NimGame
@@ -141,5 +140,4 @@ I used an LLM to get advice on improving the console UI formatting. In particula
 
 However, the LLM did not directly provide a final UI design that clearly improved the visibility of the pile display. I had to manually test and adjust the formatting choices, including the spacing between symbols and the way stones are grouped, to make the console output easier to read.
 
-The main point the LLM was not able to do correctly was deciding the most readable visual format for the pile display in the actual terminal environment. Since the appearance of Unicode symbols and spaces can vary depending on the terminal font, I manually refined the final display format.
-
+The main limitation was that the LLM could suggest formatting ideas, but it could not reliably judge which format would be most readable in my actual terminal environment. Therefore, I manually tested and refined the final pile display.
